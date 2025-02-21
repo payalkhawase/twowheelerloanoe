@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import in.shriram.dreambiketwowheelerloan.oe.model.Cibil;
 
 @Repository
-public interface OperationExecutiveRepo extends JpaRepository<Cibil, Integer>{
+public interface OperationExecutiveCibilRepo extends JpaRepository<Cibil, Integer>{
 
 }
