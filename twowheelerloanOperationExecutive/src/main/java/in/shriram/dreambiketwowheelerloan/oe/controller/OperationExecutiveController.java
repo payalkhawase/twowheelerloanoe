@@ -22,6 +22,8 @@ public class OperationExecutiveController {
 	public ResponseEntity<Enquiry> updateEnquiryStatus(@PathVariable ("cibilId") int cibilId,@PathVariable ("status") String status)
 	{
 		Enquiry eo = oes.updateEnquiryStatus(cibilId,status);
+		
 		return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
 	}
+	
 }
