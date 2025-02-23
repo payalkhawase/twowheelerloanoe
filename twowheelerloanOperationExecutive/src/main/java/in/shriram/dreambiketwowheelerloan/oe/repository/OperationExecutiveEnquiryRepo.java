@@ -8,4 +8,7 @@ import in.shriram.dreambiketwowheelerloan.oe.model.Enquiry;
 @Repository
 public interface OperationExecutiveEnquiryRepo extends JpaRepository<Enquiry, Integer> {
 
+	Enquiry findByEmail(String email);
+	
+	
 }
