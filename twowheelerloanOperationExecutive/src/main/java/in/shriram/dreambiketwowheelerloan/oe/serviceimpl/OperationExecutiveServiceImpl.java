@@ -72,7 +72,6 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 			message.setSubject(e.getSubject());
 			message.setText(e.getMessage());
 			sender.send(message);
-		
 		return e;
 		
 	}
