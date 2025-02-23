@@ -1,7 +1,5 @@
 package in.shriram.dreambiketwowheelerloan.oe.serviceimpl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -57,7 +55,6 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		
 		return eo;
 	}
-
 
 	@Override
 	public EmailSender sendEmail(EmailSender e, int customerId) {

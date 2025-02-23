@@ -27,7 +27,6 @@ public class OperationExecutiveController {
 	@Autowired
 	OperationExecutiveServicei oes;
 	
-	
 	@Value("${spring.mail.username}")
 	String fromEmail;
 	
@@ -41,7 +40,7 @@ public class OperationExecutiveController {
 	
 	@PostMapping("/sendEmailOE/{customerId}")
 	public String sendmail(@RequestBody EmailSender e, @PathVariable ("customerId") int customerId) {
-		System.out.println();
+		
 		try {
 			e.setFromEmail(fromEmail);
 		
