@@ -9,8 +9,6 @@ public interface OperationExecutiveServicei {
 
 	public Enquiry updateEnquiryStatus(int cibilId, String status);
 
-	public Enquiry getEnquiryEmail(String to);
-
 	public EmailSender sendEmail(EmailSender e, int customerId);
 
 	
