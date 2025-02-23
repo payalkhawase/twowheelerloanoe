@@ -32,11 +32,18 @@ public class OperationExecutiveController {
 	String fromEmail;
 	
 
-	@PutMapping("updateEnquiryStatus/{cibilId}/{status}")
-	public ResponseEntity<Enquiry> updateEnquiryStatus(@PathVariable ("cibilId") int cibilId,@PathVariable ("status") String status)
+	@PutMapping("updateOeEnquiryStatus/{cibilId}/{status}")
+	public String updateEnquiryStatus(@PathVariable ("cibilId") int cibilId,@PathVariable ("status") String status)
 	{
-		Enquiry eo = oes.updateEnquiryStatus(cibilId,status);
-		return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
+		Enquiry eo =  oes.updateEnquiryStatus(cibilId,status);
+		//return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
+		
+		String str = "";
+		if(eo.getEnquiryStatus().matches(status))
+		str = "Enquiry update successfully";
+		else
+		str = "Enquiry not update successfully";	
+		return str;
 	}
 	
 	@PostMapping("/sendEmailOE/{customerId}")
