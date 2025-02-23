@@ -44,8 +44,10 @@ public class OperationExecutiveController {
 		System.out.println();
 		try {
 			e.setFromEmail(fromEmail);
+		
 			EmailSender es=	oes.sendEmail(e, customerId);
 			log.info(e.getMessage());
+			log.warn("this is warning");
 		}
 		catch(Exception e2) {
 		
