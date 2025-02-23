@@ -1,9 +1,16 @@
 package in.shriram.dreambiketwowheelerloan.oe.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
+
+
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.RestTemplate;
@@ -41,7 +48,9 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		eo = rt.getForObject("http://localhost:7777/enq/enquiryByCibil/"+cibilId, Enquiry.class);
 		
 		rt.put("http://localhost:7777/enq/updateEnquiryStatus/"+eo.getCustomerId()+"/"+status,eo);
-		
+				
+		Enquiry eo1 = rt.getForObject("http://localhost:7777/enq/enquiry/"+eo.getCustomerId(), Enquiry.class);
+
 		if(status.equals("Approved")) {
 			EmailSender e= new EmailSender();
 			e.setToEmail(eo.getEmail());
@@ -52,8 +61,11 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		
 		
 		eo = rt.getForObject("http://localhost:7777/enq/enquiryByCibil/"+cibilId, Enquiry.class);
+
+		//return rt.getForEntity("http://localhost:7777/enq/enquiry/"+eo.getCustomerId(), Enquiry.class);
+
 		
-		return eo;
+		return eo1;
 	}
 
 	@Override
