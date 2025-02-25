@@ -37,15 +37,14 @@ public class OperationExecutiveController {
 	@GetMapping("getPendingEnuiry")
 	public ResponseEntity<List> getPendingEnquiry()
 	{
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 		Enquiry eo = oes.updateEnquiryStatus(cibilId,status);
 		
 		return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
-=======
+
 		Enquiry eo =  oes.updateEnquiryStatus(cibilId,status);
 		//return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
-=======
+
 		List list = rt.getForObject("http://localhost:7777/enq/enquiry/getPendingEnuiry", List.class);
 		return new ResponseEntity<List>(list,HttpStatus.OK);
 	}
@@ -55,22 +54,16 @@ public class OperationExecutiveController {
 	{
 		Enquiry eo =  oes.updateEnquiryStatus(custmerId);
 		return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
->>>>>>> branch 'main' of https://github.com/payalkhawase/twowheelerloanoe.git
-		
-<<<<<<< HEAD
+
 		String str = "";
-		if(eo.getEnquiryStatus().matches(status))
+		if(eo.getEnquiryStatus().matches(status)) 
 		str = "Enquiry update successfully";
-		else
+		else 
 		str = "Enquiry not update successfully";	
 		return str;
->>>>>>> branch 'main' of https://github.com/payalkhawase/twowheelerloanoe.git
-=======
->>>>>>> branch 'main' of https://github.com/payalkhawase/twowheelerloanoe.git
 	}
 	
-<<<<<<< HEAD
-=======
+
 	@PostMapping("/sendEmailOE/{customerId}")
 	public String sendmail(@RequestBody EmailSender e, @PathVariable ("customerId") int customerId) {
 		
@@ -88,8 +81,7 @@ public class OperationExecutiveController {
 		
 		return "Email is send successfully";
 		
-		
 	}
 	
->>>>>>> branch 'main' of https://github.com/payalkhawase/twowheelerloanoe.git
+
 }
