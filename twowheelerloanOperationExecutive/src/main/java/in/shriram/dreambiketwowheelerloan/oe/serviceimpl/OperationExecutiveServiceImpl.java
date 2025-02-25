@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.RestTemplate;
+
+import in.shriram.dreambiketwowheelerloan.oe.model.Cibil;
 import in.shriram.dreambiketwowheelerloan.oe.model.EmailSender;
 import in.shriram.dreambiketwowheelerloan.oe.model.Enquiry;
 import in.shriram.dreambiketwowheelerloan.oe.repository.EmailSenderRepo;
@@ -39,41 +41,43 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 	
 	@Autowired
 	JavaMailSender sender;
+	
 
 	@Override
-	public Enquiry updateEnquiryStatus(int cibilId, String status) {
+	public Enquiry updateEnquiryStatus(int custmerId) {
 		// TODO Auto-generated method stub
 		
-		Enquiry eo = new Enquiry();
-		eo = rt.getForObject("http://localhost:7777/enq/enquiryByCibil/"+cibilId, Enquiry.class);
+		Cibil c = new Cibil();
 		
-		rt.put("http://localhost:7777/enq/updateEnquiryStatus/"+eo.getCustomerId()+"/"+status,eo);
+		Cibil co = rt.postForObject("http://localhost:7777/cibil/add", c , Cibil.class);
+		
+		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+custmerId, Enquiry.class);
+		
+		eo.setCb(co);
+		eo.setEnquiryStatus(co.getStatus());
+		
+		rt.put("http://localhost:7777/enq/updateEnquiryStatus",eo);
 				
-		Enquiry eo1 = rt.getForObject("http://localhost:7777/enq/enquiry/"+eo.getCustomerId(), Enquiry.class);
-
-		if(status.equals("Approved")) {
+		Enquiry eo1 = rt.getForObject("http://localhost:7777/enq/enquiry/"+custmerId, Enquiry.class);
+		
+		if(eo1.getEnquiryStatus().equals("Approved")) {
 			EmailSender e= new EmailSender();
-			e.setToEmail(eo.getEmail());
+			e.setToEmail(eo1.getEmail());
 			e.setSubject("Sennd email");
-			this.sendEmail(e, eo.getCustomerId());
-			
+			this.sendEmail(e, eo1.getCustomerId());
 		}
-		
-		
-		eo = rt.getForObject("http://localhost:7777/enq/enquiryByCibil/"+cibilId, Enquiry.class);
-
-		//return rt.getForEntity("http://localhost:7777/enq/enquiry/"+eo.getCustomerId(), Enquiry.class);
-
 		
 		return eo1;
 	}
 
+
 	@Override
 	public EmailSender sendEmail(EmailSender e, int customerId) {
+		// TODO Auto-generated method stub
 		SimpleMailMessage message = new SimpleMailMessage();
 		
 		ResponseEntity<Enquiry> enq=rt.getForEntity("http://localhost:7777/enq/enquiry/"+customerId, Enquiry.class);
-			e.setMessage("Customer with CustomerId is" + enq.getBody().getCustomerId()+" has a sucessfully done"
+			e.setMessage("Customer with CustomerId is " + enq.getBody().getCustomerId()+" has a sucessfully done "
 			+enq.getBody().getCb().getCibilRemark()+ "with enquiry and your with the status is "  +enq.getBody().getCb().getStatus() +
 			" And the cibil score is" +enq.getBody().getCb().getCibilScore());
 			message.setTo(e.getToEmail());
@@ -82,11 +86,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 			message.setText(e.getMessage());
 			sender.send(message);
 		return e;
-		
 	}
-	
-	
-
 
 }
 

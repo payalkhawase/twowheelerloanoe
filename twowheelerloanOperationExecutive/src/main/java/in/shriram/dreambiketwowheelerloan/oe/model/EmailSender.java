@@ -10,7 +10,6 @@ import lombok.Data;
 @Entity
 public class EmailSender {
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int eId;
