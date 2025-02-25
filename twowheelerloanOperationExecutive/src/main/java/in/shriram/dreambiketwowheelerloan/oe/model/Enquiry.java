@@ -22,7 +22,6 @@ import lombok.Data;
 public class Enquiry {
 
 	@Id  
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int customerId;
 	private String firstname;
 	private String lastName;
