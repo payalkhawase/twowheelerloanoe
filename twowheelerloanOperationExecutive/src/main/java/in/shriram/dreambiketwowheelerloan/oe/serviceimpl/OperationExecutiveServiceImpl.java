@@ -17,12 +17,13 @@ import org.springframework.web.client.RestTemplate;
 
 
 import in.shriram.dreambiketwowheelerloan.oe.model.Cibil;
-
+import in.shriram.dreambiketwowheelerloan.oe.model.Customer;
 import in.shriram.dreambiketwowheelerloan.oe.model.EmailSender;
 import in.shriram.dreambiketwowheelerloan.oe.model.Enquiry;
 import in.shriram.dreambiketwowheelerloan.oe.repository.EmailSenderRepo;
 import in.shriram.dreambiketwowheelerloan.oe.repository.OperationExecutiveCibilRepo;
 import in.shriram.dreambiketwowheelerloan.oe.repository.OperationExecutiveEnquiryRepo;
+import in.shriram.dreambiketwowheelerloan.oe.repository.OperationExecutivrCustomerRepo;
 import in.shriram.dreambiketwowheelerloan.oe.servicei.OperationExecutiveServicei;
 
 @Service
@@ -44,10 +45,11 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 	@Autowired
 	JavaMailSender sender;
 	
-
+    @Autowired
+    OperationExecutivrCustomerRepo oecr;
+    
 	@Override
 	public Enquiry updateEnquiryStatus(int custmerId) {
-		// TODO Auto-generated method stub
 		
 		Cibil c = new Cibil();
 		
@@ -75,7 +77,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 
 	@Override
 	public EmailSender sendEmail(EmailSender e, int customerId) {
-		// TODO Auto-generated method stub
+		
 		SimpleMailMessage message = new SimpleMailMessage();
 		
 		ResponseEntity<Enquiry> enq=rt.getForEntity("http://localhost:7777/enq/enquiry/"+customerId, Enquiry.class);
@@ -89,6 +91,22 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 			sender.send(message);
 		return e;
 	}
+
+
+	@Override
+	public Customer getcustomer(int customerId, String loanStatus) {
+		
+		Customer cust=rt.getForObject("http://localhost:7777/apploan/getaCustomer/"+customerId, Customer.class);
+		
+		cust.setLoanStatus(loanStatus);
+		
+		return oecr.save(cust);
+	}
+
+
+	
+
+	
 
 }
 
