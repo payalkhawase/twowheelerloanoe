@@ -6,16 +6,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Data
 @Entity
-public class EmailSender {
-	
+@Data
+public class localAddress {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int eId;
-	private String toEmail;
-	private String fromEmail;
-	private String subject;
-	private String message;
-	
+	private int localAddressId;
+	private String areaname;
+	private String cityname;
+	private String district;
+	private String state;
+	private long pincode;
+	private int houseNumber;
+	private String streetName;
 }

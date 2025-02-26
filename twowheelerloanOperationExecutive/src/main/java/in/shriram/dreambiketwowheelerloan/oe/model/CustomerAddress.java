@@ -1,21 +1,25 @@
 package in.shriram.dreambiketwowheelerloan.oe.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
-@Data
 @Entity
-public class EmailSender {
-	
+@Data
+public class CustomerAddress {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int eId;
-	private String toEmail;
-	private String fromEmail;
-	private String subject;
-	private String message;
+	private int customerAddressId;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private permanentAddress paddr;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private localAddress laddr;
+
 }

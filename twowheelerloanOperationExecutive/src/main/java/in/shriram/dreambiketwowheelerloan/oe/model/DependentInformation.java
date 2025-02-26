@@ -6,16 +6,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Data
 @Entity
-public class EmailSender {
-	
+@Data
+public class DependentInformation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int eId;
-	private String toEmail;
-	private String fromEmail;
-	private String subject;
-	private String message;
-	
+	private int dependentInfoId;
+	private int noOfFamilyMember;
+	private int noOfChild;
+	private String maritalStatus;
+	private String dependentMember;
+	private double familyIncome;
+
+
 }

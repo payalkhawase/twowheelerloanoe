@@ -6,16 +6,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Data
 @Entity
-public class EmailSender {
-	
+@Data
+public class AllPersonalDocuments{
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int eId;
-	private String toEmail;
-	private String fromEmail;
-	private String subject;
-	private String message;
-	
+	private int documentID;
+	private byte[] addressProof;
+	private byte[] panCard;
+	private byte[] IncomeTax;
+	private byte[] addharCard;
+	private byte[] photo;
+	private byte[] signature;
+	private byte[]  bankCheque;
+	private byte[] salarySlips;
+
 }

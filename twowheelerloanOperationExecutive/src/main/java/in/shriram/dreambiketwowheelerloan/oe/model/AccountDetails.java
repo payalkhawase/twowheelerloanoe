@@ -8,14 +8,15 @@ import lombok.Data;
 
 @Data
 @Entity
-public class EmailSender {
-	
+public class AccountDetails {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int eId;
-	private String toEmail;
-	private String fromEmail;
-	private String subject;
-	private String message;
-	
+	private int accountId;
+	private String accounType;
+	private double accountBalance;
+	private String accountHolderName;
+	private String accountStatus;
+	private long accountNumber;
+
 }
