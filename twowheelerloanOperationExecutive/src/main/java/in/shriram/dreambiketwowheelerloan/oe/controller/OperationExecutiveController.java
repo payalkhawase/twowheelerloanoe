@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import in.shriram.dreambiketwowheelerloan.oe.model.EmailSender;
 import in.shriram.dreambiketwowheelerloan.oe.model.Enquiry;
@@ -27,15 +28,25 @@ public class OperationExecutiveController {
 	@Autowired
 	OperationExecutiveServicei oes;
 	
+	@Autowired
+	RestTemplate rt;
+	
 	@Value("${spring.mail.username}")
 	String fromEmail;
 	
-
-	@PutMapping("updateEnquiryStatus/{cibilId}/{status}")
-	public ResponseEntity<Enquiry> updateEnquiryStatus(@PathVariable ("cibilId") int cibilId,@PathVariable ("status") String status)
+	@GetMapping("getPendingEnuiry")
+	public ResponseEntity<List> getPendingEnquiry()
 	{
-		Enquiry eo = oes.updateEnquiryStatus(cibilId,status);
+		List list = rt.getForObject("http://localhost:7777/enq/enquiry/getPendingEnuiry", List.class);
+		return new ResponseEntity<List>(list,HttpStatus.OK);
+	}
+	
+	@PutMapping("updateOeEnquiryStatus/{custmerId}")
+	public ResponseEntity<Enquiry> updateEnquiryStatus(@PathVariable ("custmerId") int custmerId)
+	{
+		Enquiry eo =  oes.updateEnquiryStatus(custmerId);
 		return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
+		
 	}
 	
 	@PostMapping("/sendEmailOE/{customerId}")
@@ -54,10 +65,6 @@ public class OperationExecutiveController {
 		}
 		
 		return "Email is send successfully";
-		
-		
 	}
-
-	
 	
 }

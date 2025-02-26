@@ -7,9 +7,11 @@ import in.shriram.dreambiketwowheelerloan.oe.model.Enquiry;
 
 public interface OperationExecutiveServicei {
 
-	public Enquiry updateEnquiryStatus(int cibilId, String status);
+	
 
 	public EmailSender sendEmail(EmailSender e, int customerId);
+
+	public Enquiry updateEnquiryStatus(int custmerId);
 
 	
 
