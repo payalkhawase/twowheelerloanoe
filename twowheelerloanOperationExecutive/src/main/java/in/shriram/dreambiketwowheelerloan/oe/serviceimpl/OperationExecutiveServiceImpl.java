@@ -1,5 +1,8 @@
 package in.shriram.dreambiketwowheelerloan.oe.serviceimpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +36,16 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		eo = rt.getForObject("http://localhost:7777/enq/enquiryByCibil/"+cibilId, Enquiry.class);
 		
 		return eo;
+	}
+
+	@Override
+	public List<Enquiry> getAllCustomerDataSubmit() {
+		
+		List<Enquiry> loe=new ArrayList<>();
+		
+		loe=rt.getForObject("http://localhost:7777/apploan/getAllCustomerDataSubmit, null)
+		
+		return null;
 	}
 }
 
