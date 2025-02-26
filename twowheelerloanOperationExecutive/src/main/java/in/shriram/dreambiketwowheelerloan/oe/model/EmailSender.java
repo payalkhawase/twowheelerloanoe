@@ -1,27 +1,21 @@
 package in.shriram.dreambiketwowheelerloan.oe.model;
 
-import java.util.Date;
-import java.util.Random;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-
-@Entity
 @Data
-public class Cibil {
-
-	@Id 
-	private int cibilId;
-	private int cibilScore;
-	private Date cibilscoredDateTime = new Date();
-	private String status;
+@Entity
+public class EmailSender {
 	
-	private String cibilRemark;
-	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int eId;
+	private String toEmail;
+	private String fromEmail;
+	private String subject;
+	private String message;
 	
 }
