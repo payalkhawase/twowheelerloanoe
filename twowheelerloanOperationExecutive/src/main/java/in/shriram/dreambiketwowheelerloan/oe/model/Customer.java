@@ -21,7 +21,7 @@ public class Customer {
 	private int customerAge;
 	private String customerGender;
 	private String customerEmail;
-	private int password=123;
+	private String password;
 	private double customerMobileNumber;
 	private double customerAdditionalMobileNumber;
 	private double customerAmountPaidForHome;
@@ -38,7 +38,7 @@ public class Customer {
 	private CustomerAddress custAddr;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private Cibilscore cibil;
+	private Cibil cibil;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private AccountDetails acdetails;
