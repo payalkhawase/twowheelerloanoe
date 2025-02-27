@@ -13,10 +13,12 @@ import in.shriram.dreambiketwowheelerloan.oe.model.Enquiry;
 
 public interface OperationExecutiveServicei {
 
+
 	public Enquiry updateEnquiryStatus(int cibilId);
 
 	public EmailSender sendEmail(EmailSender e, int customerId);
 
 	public Customer getcustomer(int customerId, String loanStatus);
  
+
 }

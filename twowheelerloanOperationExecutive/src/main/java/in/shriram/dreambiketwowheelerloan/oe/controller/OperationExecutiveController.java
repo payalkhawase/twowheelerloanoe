@@ -67,10 +67,7 @@ public class OperationExecutiveController {
 		}
 		
 		return "Email is send successfully";
-		
-		
 	}
-	
 	
 	  @GetMapping("getAllCustomerDataSubmit") 
 	  public ResponseEntity<List> getSubmitEnquiry() 

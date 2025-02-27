@@ -1,5 +1,7 @@
 package in.shriram.dreambiketwowheelerloan.oe.serviceimpl;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -13,11 +15,14 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.RestTemplate;
 
+import in.shriram.dreambiketwowheelerloan.oe.model.Cibil;
+
 
 
 
 import in.shriram.dreambiketwowheelerloan.oe.model.Cibil;
 import in.shriram.dreambiketwowheelerloan.oe.model.Customer;
+
 import in.shriram.dreambiketwowheelerloan.oe.model.EmailSender;
 import in.shriram.dreambiketwowheelerloan.oe.model.Enquiry;
 import in.shriram.dreambiketwowheelerloan.oe.repository.EmailSenderRepo;
@@ -38,7 +43,6 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 	@Autowired
 	OperationExecutiveEnquiryRepo oers;
 	
-	
 	@Autowired
 	RestTemplate rt;
 	
@@ -52,12 +56,21 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 	public Enquiry updateEnquiryStatus(int custmerId) {
 		
 		Cibil c = new Cibil();
-		
+			
+			
+			
 		Cibil co = rt.postForObject("http://localhost:7777/cibil/add", c , Cibil.class);
 		
 		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+custmerId, Enquiry.class);
 		
 		eo.setCb(co);
+		
+		if(co.getStatus().equals("Approved")) {
+			Random rm= new Random();
+			int password= rm.nextInt(9999, 99999);
+			eo.setPassword(password);
+		}
+		
 		eo.setEnquiryStatus(co.getStatus());
 		
 		rt.put("http://localhost:7777/enq/updateEnquiryStatus",eo);
@@ -77,21 +90,20 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 
 	@Override
 	public EmailSender sendEmail(EmailSender e, int customerId) {
-		
 		SimpleMailMessage message = new SimpleMailMessage();
 		
 		ResponseEntity<Enquiry> enq=rt.getForEntity("http://localhost:7777/enq/enquiry/"+customerId, Enquiry.class);
 			e.setMessage("Customer with CustomerId is " + enq.getBody().getCustomerId()+" has a sucessfully done "
 			+enq.getBody().getCb().getCibilRemark()+ "with enquiry and your with the status is "  +enq.getBody().getCb().getStatus() +
-			" And the cibil score is" +enq.getBody().getCb().getCibilScore());
-			message.setTo(e.getToEmail());
+			" And the cibil score is" +enq.getBody().getCb().getCibilScore()+"Your username is "+enq.getBody().getEmail()+ "And your password is "+enq.getBody().getPassword());
+			
 			message.setFrom(e.getFromEmail());
+			message.setTo(e.getToEmail());
 			message.setSubject(e.getSubject());
 			message.setText(e.getMessage());
 			sender.send(message);
 		return e;
 	}
-
 
 	@Override
 	public Customer getcustomer(int customerId, String loanStatus) {
@@ -105,7 +117,6 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 
 
 	
-
 	
 
 }
