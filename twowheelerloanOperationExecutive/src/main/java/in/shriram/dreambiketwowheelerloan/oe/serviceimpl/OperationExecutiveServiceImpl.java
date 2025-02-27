@@ -56,15 +56,21 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 	public Enquiry updateEnquiryStatus(int custmerId) {
 		
 		Cibil c = new Cibil();
-			Random rm= new Random();
 			
-			int password= rm.nextInt(9999, 99999);
+			
+			
 		Cibil co = rt.postForObject("http://localhost:7777/cibil/add", c , Cibil.class);
 		
 		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+custmerId, Enquiry.class);
 		
 		eo.setCb(co);
-		eo.setPassword(password);
+		
+		if(co.getStatus().equals("Approved")) {
+			Random rm= new Random();
+			int password= rm.nextInt(9999, 99999);
+			eo.setPassword(password);
+		}
+		
 		eo.setEnquiryStatus(co.getStatus());
 		
 		rt.put("http://localhost:7777/enq/updateEnquiryStatus",eo);
