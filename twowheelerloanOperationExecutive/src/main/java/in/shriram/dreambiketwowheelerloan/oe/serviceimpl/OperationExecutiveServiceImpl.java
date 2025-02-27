@@ -107,7 +107,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 	@Override
 	public Customer getcustomer(int customerId, String loanStatus) {
 		
-		Customer cust=rt.getForObject("http://localhost:7777/apploan/getCustomer/"+customerId, Customer.class);
+		Customer cust=rt.getForObject("http://localhost:7777/apploan/getaCustomer/"+customerId, Customer.class);
 		
 		cust.setLoanStatus(loanStatus);
 		
