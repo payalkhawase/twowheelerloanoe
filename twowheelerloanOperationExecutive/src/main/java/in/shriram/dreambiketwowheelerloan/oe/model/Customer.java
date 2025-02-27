@@ -21,8 +21,13 @@ public class Customer {
 	private int customerAge;
 	private String customerGender;
 	private String customerEmail;
+<<<<<<< HEAD
 	private int password;
 	private String customerMobileNumber;
+=======
+	private String password;
+	private double customerMobileNumber;
+>>>>>>> branch 'main' of https://github.com/payalkhawase/twowheelerloanoe.git
 	private double customerAdditionalMobileNumber;
 	private double customerAmountPaidForHome;
 	private double customerTotalLoanRequired;
@@ -40,7 +45,7 @@ public class Customer {
 	private CustomerAddress custAddr;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private Cibilscore cibil;
+	private Cibil cibil;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private AccountDetails acdetails;

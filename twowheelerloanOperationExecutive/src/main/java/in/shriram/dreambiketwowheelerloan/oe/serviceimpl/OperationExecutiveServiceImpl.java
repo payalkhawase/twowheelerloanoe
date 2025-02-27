@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.RestTemplate;
-
-import in.shriram.dreambiketwowheelerloan.oe.model.Cibil;
-
-
-
 
 import in.shriram.dreambiketwowheelerloan.oe.model.Cibil;
 import in.shriram.dreambiketwowheelerloan.oe.model.Customer;
@@ -59,8 +56,6 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		
 		Cibil c = new Cibil();
 			
-			
-			
 		Cibil co = rt.postForObject("http://localhost:7777/cibil/add", c , Cibil.class);
 		
 		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+custmerId, Enquiry.class);
@@ -68,9 +63,11 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		eo.setCb(co);
 		
 		if(co.getStatus().equals("Approved")) {
-			Random rm= new Random();
-			int password= rm.nextInt(9999, 99999);
-			eo.setPassword(password);
+			int length = 10;
+		    boolean useLetters = true;
+		    boolean useNumbers = false;
+		    String pass = RandomStringUtils.random(length, useLetters, useNumbers);
+			eo.setPassword(pass);
 		}
 		
 		eo.setEnquiryStatus(co.getStatus());
@@ -111,7 +108,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 	@Override
 	public Customer getcustomer(int customerId, String loanStatus) {
 		
-		Customer cust=rt.getForObject("http://localhost:7777/apploan/getaCustomer/"+customerId, Customer.class);
+		Customer cust=rt.getForObject("http://localhost:7777/apploan/getCustomer/"+customerId, Customer.class);
 		
 		cust.setLoanStatus(loanStatus);
 		
