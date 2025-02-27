@@ -43,10 +43,10 @@ public class OperationExecutiveController {
 		return new ResponseEntity<List>(list,HttpStatus.OK);
 	}
 	
-	@PutMapping("updateOeEnquiryStatus/{custmerId}")
-	public ResponseEntity<Enquiry> updateEnquiryStatus(@PathVariable ("custmerId") int custmerId)
+	@PutMapping("updateOeEnquiryStatus/{customerId}")
+	public ResponseEntity<Enquiry> updateEnquiryStatus(@PathVariable ("customerId") int customerId)
 	{
-		Enquiry eo =  oes.updateEnquiryStatus(custmerId);
+		Enquiry eo =  oes.updateEnquiryStatus(customerId);
 		return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
 		
 	}

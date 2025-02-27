@@ -53,15 +53,15 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
     OperationExecutivrCustomerRepo oecr;
     
 	@Override
-	public Enquiry updateEnquiryStatus(int custmerId) {
+	public Enquiry updateEnquiryStatus(int customerId) {
 		
 		Cibil c = new Cibil();
 			
 			
 			
 		Cibil co = rt.postForObject("http://localhost:7777/cibil/add", c , Cibil.class);
-		
-		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+custmerId, Enquiry.class);
+			
+		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+customerId, Enquiry.class);
 		
 		eo.setCb(co);
 		
@@ -71,11 +71,13 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 			eo.setPassword(password);
 		}
 		
+		
 		eo.setEnquiryStatus(co.getStatus());
+		
 		
 		rt.put("http://localhost:7777/enq/updateEnquiryStatus",eo);
 				
-		Enquiry eo1 = rt.getForObject("http://localhost:7777/enq/enquiry/"+custmerId, Enquiry.class);
+		Enquiry eo1 = rt.getForObject("http://localhost:7777/enq/enquiry/"+customerId, Enquiry.class);
 		
 		if(eo1.getEnquiryStatus().equals("Approved")) {
 			EmailSender e= new EmailSender();
@@ -85,6 +87,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		}
 		
 		return eo1;
+		
 	}
 
 

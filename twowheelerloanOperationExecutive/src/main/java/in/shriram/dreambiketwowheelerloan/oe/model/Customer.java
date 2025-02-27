@@ -21,7 +21,7 @@ public class Customer {
 	private int customerAge;
 	private String customerGender;
 	private String customerEmail;
-	private int password;
+	private int password=123;
 	private double customerMobileNumber;
 	private double customerAdditionalMobileNumber;
 	private double customerAmountPaidForHome;
