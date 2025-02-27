@@ -29,7 +29,7 @@ public class Enquiry {
 	private String city;
 	private int age;
 	private String email;
-	private int password;
+	private String password;
 	private String mobileNo;
 	private long alternateMobno;
 	private String pancardNo;
