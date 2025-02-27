@@ -37,17 +37,8 @@ public class OperationExecutiveController {
 	@GetMapping("/getPendingEnuiry")
 	public ResponseEntity<List> getPendingEnquiry()
 	{
-		List list = rt.getForObject("http://localhost:7777/enq/enquiry/getPendingEnuiry", List.class);
+		List list = rt.getForObject("http://localhost:7777/enq/enquiry/getPendingEnquiry", List.class);
 		return new ResponseEntity<List>(list,HttpStatus.OK);
-	}
-	
-	
-	
-	@GetMapping("/getAllCustomer")
-	public ResponseEntity<List> getAllCustomerDataSubmit(){
-	
-		List l=rt.getForObject("http://localhost:7777/enq/enquiry/getAllCustomer", List.class);
-		return new ResponseEntity<List>(l,HttpStatus.OK);
 	}
 	
 	
