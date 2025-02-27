@@ -56,9 +56,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 	public Enquiry updateEnquiryStatus(int customerId) {
 		
 		Cibil c = new Cibil();
-			
-			
-			
+				
 		Cibil co = rt.postForObject("http://localhost:7777/cibil/add", c , Cibil.class);
 			
 		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+customerId, Enquiry.class);
@@ -73,7 +71,6 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		
 		
 		eo.setEnquiryStatus(co.getStatus());
-		
 		
 		rt.put("http://localhost:7777/enq/updateEnquiryStatus",eo);
 				
