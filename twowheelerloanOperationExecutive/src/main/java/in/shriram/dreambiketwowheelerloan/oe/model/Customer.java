@@ -36,13 +36,27 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerAddress custAddr;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private cibilscore cibil;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Cibilscore cibil;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private AccountDetails acdetails;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private AccountDetails accountdetails;
+	private GuarantorDetails gdetails;
+ 
+	@OneToOne(cascade = CascadeType.ALL)
+	private LoanDisbursement loandisburst;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Ledger led;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private SanctionLetter sanctionletter;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private CustomerVerification custVerification;
+
+
 
 }

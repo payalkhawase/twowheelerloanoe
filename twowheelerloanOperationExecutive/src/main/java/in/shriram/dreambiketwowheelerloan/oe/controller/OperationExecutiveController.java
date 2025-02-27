@@ -80,7 +80,7 @@ public class OperationExecutiveController {
 		  }
 	 
 	
-	@PutMapping("/getaCustomer/{customerId}/{loanStatus}")
+	@PutMapping("/getCustomer/{customerId}/{loanStatus}")
     public ResponseEntity<Customer> getcustomer(@PathVariable("customerId") int customerId,@PathVariable("loanStatus") String loanStatus)
 	{
 	Customer cu= oes.getcustomer(customerId,loanStatus);
