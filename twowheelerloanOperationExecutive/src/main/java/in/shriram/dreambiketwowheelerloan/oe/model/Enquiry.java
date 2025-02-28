@@ -37,6 +37,6 @@ public class Enquiry {
 	private String enquiryStatus="Pending";
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private Cibil cb;
+	private Cibil cibil;
 	
 }
