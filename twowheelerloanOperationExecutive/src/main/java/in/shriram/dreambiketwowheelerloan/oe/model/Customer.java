@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
@@ -37,7 +38,8 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerAddress custAddr;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE ,orphanRemoval = false)
+	@JoinColumn(name = "cibilId")
 	private Cibil cibil;
 	
 	@OneToOne(cascade = CascadeType.ALL)
