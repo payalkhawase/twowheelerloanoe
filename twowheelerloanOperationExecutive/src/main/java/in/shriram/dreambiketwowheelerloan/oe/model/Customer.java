@@ -21,13 +21,8 @@ public class Customer {
 	private int customerAge;
 	private String customerGender;
 	private String customerEmail;
-<<<<<<< HEAD
 	private int password;
 	private String customerMobileNumber;
-=======
-	private String password;
-	private double customerMobileNumber;
->>>>>>> branch 'main' of https://github.com/payalkhawase/twowheelerloanoe.git
 	private double customerAdditionalMobileNumber;
 	private double customerAmountPaidForHome;
 	private double customerTotalLoanRequired;
