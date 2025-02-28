@@ -37,7 +37,7 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerAddress custAddr;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	private Cibil cibil;
 	
 	@OneToOne(cascade = CascadeType.ALL)
