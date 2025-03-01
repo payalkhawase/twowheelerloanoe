@@ -33,7 +33,7 @@ public class OperationExecutiveController {
 	
 	@Autowired
 	RestTemplate rt;
-	
+	 
 	@Value("${spring.mail.username}")
 	String fromEmail;
 	
