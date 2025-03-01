@@ -16,6 +16,9 @@ public class CustomerVerification {
 	private String verificationDate;
 	private String status;
 	private String remarks;
+	
+	
 
+	
 	
 }
