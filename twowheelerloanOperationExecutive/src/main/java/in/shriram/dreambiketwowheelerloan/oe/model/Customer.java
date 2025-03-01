@@ -36,6 +36,12 @@ public class Customer {
 	@JoinColumn(name = "cibilId")
 	private Cibil cibil;
 
+	
+	@OneToOne(cascade = CascadeType.MERGE,orphanRemoval = false)
+	@JoinColumn(name = "sanctionId")
+	private SanctionLetter sanctionletter;
+
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerVerification custVerification;
 	

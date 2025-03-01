@@ -60,8 +60,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		Cibil co = rt.postForObject("http://localhost:7777/cibil/add", c , Cibil.class);
 			
 		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+customerId, Enquiry.class);
-		
-		eo.setCibil(co);
+	eo.setCibil(co);
 		
 		if(co.getStatus().equals("Approved")) {
 			int length = 10;
@@ -113,7 +112,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		Customer cust=rt.getForObject("http://localhost:7777/apploan/getaCustomer/"+customerId, Customer.class);
 		
 		cust.setLoanStatus(loanStatus);
-		
+		//cust.setCibil();
 		return oecr.save(cust);
 	}
 
