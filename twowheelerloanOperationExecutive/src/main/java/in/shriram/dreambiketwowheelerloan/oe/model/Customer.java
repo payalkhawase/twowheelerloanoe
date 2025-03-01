@@ -38,6 +38,8 @@ public class Customer {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerVerification custVerification;
+	
+	
 
 
 
