@@ -78,7 +78,7 @@ public class OperationExecutiveController {
 		  }
 	 
 	
-	@PutMapping("/getCustomer/{customerId}/{loanStatus}")
+	@PutMapping("/changeloanstatus/{customerId}/{loanStatus}")
     public ResponseEntity<Customer> getcustomer(@PathVariable("customerId") int customerId,@PathVariable("loanStatus") String loanStatus)
 	{
 	Customer cu= oes.getcustomer(customerId,loanStatus);
