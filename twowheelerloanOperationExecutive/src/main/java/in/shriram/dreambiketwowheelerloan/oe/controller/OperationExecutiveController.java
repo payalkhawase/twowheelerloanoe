@@ -91,5 +91,6 @@ public class OperationExecutiveController {
 		CustomerVerification c=oes.addVerifictiondetails(cu,customerId);
 		return new ResponseEntity<CustomerVerification>(c,HttpStatus.OK);
 		
+		
 	}
 }
