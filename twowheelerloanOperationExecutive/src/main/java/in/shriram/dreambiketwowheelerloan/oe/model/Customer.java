@@ -1,6 +1,5 @@
 package in.shriram.dreambiketwowheelerloan.oe.model;
 
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,8 +44,26 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerVerification custVerification;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private AllPersonalDocuments personalDoc;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private DependentInformation depInfo;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private CustomerAddress custAddr;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	private AccountDetails acdetails;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private GuarantorDetails gdetails;
+ 
+	@OneToOne(cascade = CascadeType.ALL)
+	private LoanDisbursement loandisburst;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Ledger led;
 
-
+	
 }
