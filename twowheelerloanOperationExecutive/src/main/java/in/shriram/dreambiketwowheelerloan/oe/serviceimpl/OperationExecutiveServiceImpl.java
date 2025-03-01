@@ -58,7 +58,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		
 		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+custmerId, Enquiry.class);
 		
-		eo.setCb(co);
+		eo.setCibil(co);
 		
 		if(co.getStatus().equals("Approved")) {
 			int length = 10;
@@ -91,8 +91,8 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		
 		ResponseEntity<Enquiry> enq=rt.getForEntity("http://localhost:7777/enq/enquiry/"+customerId, Enquiry.class);
 			e.setMessage("Customer with CustomerId is " + enq.getBody().getCustomerId()+" has a sucessfully done "
-			+enq.getBody().getCb().getCibilRemark()+ "with enquiry and your with the status is "  +enq.getBody().getCb().getStatus() +
-			" And the cibil score is" +enq.getBody().getCb().getCibilScore()+"Your username is "+enq.getBody().getEmail()+ "And your password is "+enq.getBody().getPassword());
+			+enq.getBody().getCibil().getCibilRemark()+ "with enquiry and your with the status is "  +enq.getBody().getCibil().getStatus() +
+			" And the cibil score is" +enq.getBody().getCibil().getCibilScore()+"Your username is "+enq.getBody().getEmail()+ "And your password is "+enq.getBody().getPassword());
 			
 			message.setFrom(e.getFromEmail());
 			message.setTo(e.getToEmail());
@@ -108,7 +108,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		Customer cust=rt.getForObject("http://localhost:7777/apploan/getCustomer/"+customerId, Customer.class);
 		
 		cust.setLoanStatus(loanStatus);
-		
+		//cust.setCibil();
 		return oecr.save(cust);
 	}
 
