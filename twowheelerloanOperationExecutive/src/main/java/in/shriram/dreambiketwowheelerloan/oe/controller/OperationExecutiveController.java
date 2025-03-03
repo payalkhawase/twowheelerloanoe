@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import in.shriram.dreambiketwowheelerloan.oe.model.Customer;
+import in.shriram.dreambiketwowheelerloan.oe.model.CustomerVerification;
 import in.shriram.dreambiketwowheelerloan.oe.model.EmailSender;
 import in.shriram.dreambiketwowheelerloan.oe.model.Enquiry;
 import in.shriram.dreambiketwowheelerloan.oe.servicei.OperationExecutiveServicei;
@@ -32,7 +32,7 @@ public class OperationExecutiveController {
 	
 	@Autowired
 	RestTemplate rt;
-	
+	 
 	@Value("${spring.mail.username}")
 	String fromEmail;
 	
@@ -43,12 +43,11 @@ public class OperationExecutiveController {
 		return new ResponseEntity<List>(list,HttpStatus.OK);
 	}
 	
-	
-	
-	@PutMapping("/updateOeEnquiryStatus/{custmerId}")
-	public ResponseEntity<Enquiry> updateEnquiryStatus(@PathVariable ("custmerId") int custmerId)
+
+	@PutMapping("updateOeEnquiryStatus/{customerId}")
+	public ResponseEntity<Enquiry> updateEnquiryStatus(@PathVariable ("customerId") int customerId)
 	{
-		Enquiry eo =  oes.updateEnquiryStatus(custmerId);
+		Enquiry eo =  oes.updateEnquiryStatus(customerId);
 		return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
 		
 	}
@@ -79,10 +78,19 @@ public class OperationExecutiveController {
 		  }
 	 
 	
-	@PutMapping("/getCustomer/{customerId}/{loanStatus}")
+	@PutMapping("/changeloanstatus/{customerId}/{loanStatus}")
     public ResponseEntity<Customer> getcustomer(@PathVariable("customerId") int customerId,@PathVariable("loanStatus") String loanStatus)
 	{
 	Customer cu= oes.getcustomer(customerId,loanStatus);
 	return new ResponseEntity<Customer>(cu,HttpStatus.OK);
     }
+	
+	@PostMapping("/verification/{customerId}")
+	public ResponseEntity<CustomerVerification> addVerificationdetails(@RequestBody CustomerVerification cu,@PathVariable int customerId){
+		
+		CustomerVerification c=oes.addVerifictiondetails(cu,customerId);
+		return new ResponseEntity<CustomerVerification>(c,HttpStatus.OK);
+		
+		
+	}
 }
