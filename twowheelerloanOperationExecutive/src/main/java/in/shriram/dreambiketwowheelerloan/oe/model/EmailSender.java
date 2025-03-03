@@ -18,4 +18,5 @@ public class EmailSender {
 	private String subject;
 	private String message;
 	
+	
 }
