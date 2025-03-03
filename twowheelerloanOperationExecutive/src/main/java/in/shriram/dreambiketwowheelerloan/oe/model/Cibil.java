@@ -19,8 +19,8 @@ public class Cibil {
 	private int cibilScore;
 	private Date cibilscoredDateTime = new Date();
 	private String status;
-	
 	private String cibilRemark;
+	
 	
 	
 	
