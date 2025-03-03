@@ -21,13 +21,14 @@ public class Customer {
 	private int customerAge;
 	private String customerGender;
 	private String customerEmail;
-	private int password;
+	private String password;
 	private String customerMobileNumber;
 	private double customerAdditionalMobileNumber;
 	private double customerAmountPaidForHome;
 	private double customerTotalLoanRequired;
 	private String loanStatus="Submit";
 	private double onRoadPrice;
+	//private 
 
 	
 	@OneToOne(cascade = CascadeType.ALL)
