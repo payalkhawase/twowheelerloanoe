@@ -18,5 +18,7 @@ public class AccountDetails {
 	private String accountHolderName;
 	private String accountStatus;
 	private long accountNumber;
+	private String bankName;
+	private String IFSCCode;
 
 }
