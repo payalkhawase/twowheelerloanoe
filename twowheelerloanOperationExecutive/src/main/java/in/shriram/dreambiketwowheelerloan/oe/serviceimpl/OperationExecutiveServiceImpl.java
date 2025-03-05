@@ -1,7 +1,5 @@
 package in.shriram.dreambiketwowheelerloan.oe.serviceimpl;
 
-import java.util.Random;
-
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -123,7 +121,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
      Customer cust=rt.getForObject("http://localhost:7777/apploan/getaCustomer/"+customerId, Customer.class);
 		
 		CustomerVerification cvo=ov.save(cu);
-		
+		//cust.setLoanStatus(loanStatus);
 		cust.setCustVerification(cvo);
 		oecr.save(cust);
 		
