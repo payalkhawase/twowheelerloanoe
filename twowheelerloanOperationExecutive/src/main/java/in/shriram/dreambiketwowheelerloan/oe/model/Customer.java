@@ -1,5 +1,7 @@
 package in.shriram.dreambiketwowheelerloan.oe.model;
 
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -65,7 +67,7 @@ public class Customer {
 	private LoanDisbursement loandisburst;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private Ledger led;
+	private Set<Ledger> led;
 
 	
 }
