@@ -1,11 +1,14 @@
 package in.shriram.dreambiketwowheelerloan.oe.model;
 
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
@@ -50,8 +53,9 @@ public class Customer {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerAddress custAddr;
-	
-	@OneToOne(cascade = CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "account_id")
 	private AccountDetails acdetails;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -60,7 +64,7 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private LoanDisbursement loandisburst;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Ledger led;
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<Ledger> led;
 
 }
