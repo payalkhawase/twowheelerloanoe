@@ -1,6 +1,7 @@
 package in.shriram.dreambiketwowheelerloan.oe.serviceimpl;
 
 import org.apache.commons.lang.RandomStringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -123,11 +124,11 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		CustomerVerification cvo=ov.save(cu);
 		//cust.setLoanStatus(loanStatus);
 		cust.setCustVerification(cvo);
-<<<<<<< HEAD
+
 		//cust.setLoanStatus(loanStatus);
-=======
+
 		cust.setLoanStatus("Verified");
->>>>>>> branch 'main' of https://github.com/payalkhawase/twowheelerloanoe.git
+
 		oecr.save(cust);
 		
 		
