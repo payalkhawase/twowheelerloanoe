@@ -123,6 +123,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		CustomerVerification cvo=ov.save(cu);
 		//cust.setLoanStatus(loanStatus);
 		cust.setCustVerification(cvo);
+		cust.setLoanStatus("Verified");
 		oecr.save(cust);
 		
 		return cvo;
