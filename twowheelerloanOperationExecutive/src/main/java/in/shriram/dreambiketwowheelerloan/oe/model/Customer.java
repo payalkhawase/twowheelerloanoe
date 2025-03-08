@@ -1,13 +1,10 @@
 package in.shriram.dreambiketwowheelerloan.oe.model;
 
 import java.util.List;
+
 import java.util.Set;
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> branch 'main' of https://github.com/payalkhawase/twowheelerloanoe.git
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
