@@ -120,12 +120,14 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 	@Override
 	public CustomerVerification addVerifictiondetails(CustomerVerification cu, int customerId) {
 	
-     Customer cust=rt.getForObject("http://localhost:7777/apploan/getCustomer/"+customerId, Customer.class);
+     Customer cust=rt.getForObject("http://localhost:7777/apploan/getaCustomer/"+customerId, Customer.class);
 		
 		CustomerVerification cvo=ov.save(cu);
 		
 		cust.setCustVerification(cvo);
+		//cust.setLoanStatus(loanStatus);
 		oecr.save(cust);
+		
 		
 		return cvo;
 	}
