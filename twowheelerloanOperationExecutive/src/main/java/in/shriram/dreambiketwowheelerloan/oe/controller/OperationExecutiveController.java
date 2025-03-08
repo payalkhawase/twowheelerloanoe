@@ -85,6 +85,7 @@ public class OperationExecutiveController {
 	return new ResponseEntity<Customer>(cu,HttpStatus.OK);
     }
 	
+	
 	@PostMapping("/verification/{customerId}")
 	public ResponseEntity<CustomerVerification> addVerificationdetails(@RequestBody CustomerVerification cu,@PathVariable("customerId")int customerId){
 		

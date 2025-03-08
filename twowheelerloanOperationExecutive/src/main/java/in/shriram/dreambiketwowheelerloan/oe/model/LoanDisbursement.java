@@ -1,5 +1,6 @@
 package in.shriram.dreambiketwowheelerloan.oe.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +14,7 @@ public class LoanDisbursement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int agreementId;
+	@Column(unique = true, nullable = false)
 	private int loanNo;
 	private String agreementDate;
 	private String amountPayType;

@@ -3,8 +3,11 @@ package in.shriram.dreambiketwowheelerloan.oe.model;
 import java.util.List;
 import java.util.Set;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> branch 'main' of https://github.com/payalkhawase/twowheelerloanoe.git
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +33,7 @@ public class Customer {
 	private String password;
 	private double customerMobileNumber;
 	private double customerAdditionalMobileNumber;
-	private double customerAmountPaidForHome;
+	private double customerAmountPaidForBike;
 	private double customerTotalLoanRequired;
 	private String loanStatus="Submit";
 	private double onRoadPrice;
