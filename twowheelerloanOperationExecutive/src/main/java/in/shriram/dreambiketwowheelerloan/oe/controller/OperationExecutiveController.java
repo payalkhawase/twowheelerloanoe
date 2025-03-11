@@ -90,8 +90,7 @@ public class OperationExecutiveController {
 	public ResponseEntity<CustomerVerification> addVerificationdetails(@RequestBody CustomerVerification cu,@PathVariable int customerId){
 		
 		CustomerVerification c=oes.addVerifictiondetails(cu,customerId);
+		
 		return new ResponseEntity<CustomerVerification>(c,HttpStatus.OK);
-		
-		
 	}
 }
