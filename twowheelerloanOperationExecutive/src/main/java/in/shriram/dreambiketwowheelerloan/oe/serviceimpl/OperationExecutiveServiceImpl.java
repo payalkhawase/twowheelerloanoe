@@ -1,19 +1,25 @@
 package in.shriram.dreambiketwowheelerloan.oe.serviceimpl;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.apache.commons.lang.RandomStringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
-
-
-
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import in.shriram.dreambiketwowheelerloan.oe.model.Cibil;
 import in.shriram.dreambiketwowheelerloan.oe.model.Customer;
@@ -51,15 +57,30 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
     @Autowired
     OperationExecutiveVerificationRepo ov;
     
-	@Override
-	public Enquiry updateEnquiryStatus(int customerId) {
+    @Autowired
+    ObjectMapper om;
+    
+    @Autowired
+    KafkaTemplate<String, String> kafkaTemplate;
+    
+    public Cibil co;
+    
+ // Kafka Listener to listen for new Cibil data
+//    @KafkaListener(topics = "cibil_topic", groupId = "cibil_group", containerFactory = "containerFactory")
+//    public void listenCibilData(String json) throws JsonMappingException, JsonProcessingException {
+//    	
+//        co = om.readValue(json, Cibil.class);  // Parse Cibil object from JSON
+//        System.out.println("Received Cibil: " + co);
+//    }
+        
+    public Enquiry updateEnquiryStatus(int customerId) {
 		
-		Cibil c = new Cibil();
-
-		Cibil co = rt.postForObject("http://localhost:7777/cibil/add", c , Cibil.class);
-			
+    	Cibil c = new Cibil();
+    	
+    	co = rt.postForObject("http://localhost:7777/cibil/add", c , Cibil.class);
+    	
 		Enquiry eo = rt.getForObject("http://localhost:7777/enq/enquiry/"+customerId, Enquiry.class);
-	eo.setCibil(co);
+		eo.setCibil(co);
 		
 		if(co.getStatus().equals("Approved")) {
 			int length = 10;
@@ -68,8 +89,6 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		    String pass = RandomStringUtils.random(length, useLetters, useNumbers);
 			eo.setPassword(pass);
 		}
-		
-		
 		eo.setEnquiryStatus(co.getStatus());
 		
 		rt.put("http://localhost:7777/enq/updateEnquiryStatus",eo);
@@ -87,7 +106,7 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		
 	}
 
-
+	
 	@Override
 	public EmailSender sendEmail(EmailSender e, int customerId) {
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -135,9 +154,6 @@ public class OperationExecutiveServiceImpl implements OperationExecutiveServicei
 		return cvo;
 	}
 
-	
-
-	
 	
 
 }

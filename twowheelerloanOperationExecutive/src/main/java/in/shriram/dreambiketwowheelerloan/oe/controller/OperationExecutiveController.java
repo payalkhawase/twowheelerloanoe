@@ -2,10 +2,12 @@ package in.shriram.dreambiketwowheelerloan.oe.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import in.shriram.dreambiketwowheelerloan.oe.model.Cibil;
 import in.shriram.dreambiketwowheelerloan.oe.model.Customer;
 import in.shriram.dreambiketwowheelerloan.oe.model.CustomerVerification;
 import in.shriram.dreambiketwowheelerloan.oe.model.EmailSender;
@@ -26,8 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/oe")
 @Slf4j
+@CrossOrigin("*")
 public class OperationExecutiveController {
-
+ 
 	@Autowired
 	OperationExecutiveServicei oes;
 	
@@ -47,6 +51,7 @@ public class OperationExecutiveController {
 	@PutMapping("updateOeEnquiryStatus/{customerId}")
 	public ResponseEntity<Enquiry> updateEnquiryStatus(@PathVariable ("customerId") int customerId)
 	{
+		
 		Enquiry eo =  oes.updateEnquiryStatus(customerId);
 		return new ResponseEntity<Enquiry>(eo,HttpStatus.OK);
 		
